@@ -1,0 +1,364 @@
+@property --num {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+
+$particles: 50;
+$width: 1200;
+$height: 1200;
+$box-shadow: ();
+$box-shadow2: ();
+@for $i from 0 through $particles {
+  $box-shadow: $box-shadow,
+               random($width)-$width / 2 + px
+               random($height)-$height / 1.2 + px
+               hsl(random(360), 100, 50);
+  $box-shadow2: $box-shadow2, 0 0 #fff
+}
+
+
+*, *:after , *:before {
+  box-sizing: border-box;
+}
+$bird: " https://i.ibb.co/9qgGvRr/pixil-frame-0-9.png";
+body {
+  background:url(https://i.ibb.co/2hsQZ5h/wp9956882-halloween-pixel-art-wallpapers.gif);
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  font-family: Arial;
+}
+
+.sticky{
+  position: fixed;
+  z-index: 10;
+  top: 10px;
+  left: 50%;
+  transform: translate(-50%);
+  font-size: 24px;
+}
+
+.score {
+  --num: 0;
+  transition: --num 0s;
+  transition-delay: 0s;
+  counter-reset: num var(--num);
+  &::after {
+    content: counter(num);
+  }
+}
+
+#start {
+ opacity: 0;
+  &:checked { 
+    & ~  .starter {
+      display: none;
+    }
+   & ~ .env {
+
+     &:hover {
+      cursor: url($bird), auto;
+      left: calc(-77880px - 50vw);
+      transition:  120s ease-in;
+
+      & ~ .sticky .score ,  .score{ 
+          transition: --num 120s;
+          --num: 120;
+       }
+
+      .sky:hover ~ .overlay, 
+      .land:hover ~ .overlay, 
+      .pipe:hover ~ .overlay, 
+      .overlay:hover,
+      .final:hover
+      {
+        visibility: visible;
+
+        .score{ 
+          --num: 125;
+          transition: --num 100s;
+          transition-delay: 300s;
+        }
+
+
+      }
+    }
+   }
+  }
+}
+
+.starter {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 25;
+  img {
+    display: block;
+    margin: auto;
+  }
+  h1 {
+    margin: 0 0 50px;
+    text-align: center;
+    font-size: 56px;
+    font-weight: 800;
+    color: #FFF;
+    filter: drop-shadow(0 2px  rgb(95, 74, 3));
+    text-shadow:  0 2px  #a7810f ,
+                  0 -2px  #a7810f ,  
+                  -2px 0 #a7810f ,  
+                  2px 0 #a7810f;
+  }
+}
+
+
+.env {
+  position: absolute;
+  display: flex;
+  flex-wrap: nowrap;
+  left: 0;
+  top: 0;
+  height: 100%;
+  padding-left: 50vw;
+  cursor: auto;
+}
+.sky {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  height: 50px;
+  background: #00C853;
+  background: linear-gradient(to bottom, #9de757 4%,#d5f97f 6%,#9de757 7%,#9de757 14%,#9de757 14%,#74bf2e 15%,#74bf2e 17%,#9de757 20%,#74bf2e 23%,#74bf2e 70%,#74bf2e 70%,#578220 71%,#578220 72%,#74bf2e 73%,#74bf2e 75%,#527e23 86%);
+  left: 0;
+  z-index: 1;
+  border-bottom: 1px solid #43A047; 
+}
+.land {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  height: 10vh;
+  background: #dcd793;
+  left: 0;
+  z-index: 8;
+  &:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    top: 0;
+    border: 1px solid #49414a;
+    background: repeating-linear-gradient( -45deg, #96e453, #96e453 1vw, #5b9024 1vw, #5b9024 2vw );
+    box-shadow: 0 2px 4px#cbaa4d;
+  }
+}
+.pipe {
+  width: 120px;
+  height: 60vh;
+  margin: 0  120px;
+  background: linear-gradient(to right, #9de757 4%,#d5f97f 6%,#9de757 7%,#9de757 14%,#9de757 14%,#74bf2e 15%,#74bf2e 17%,#9de757 20%,#74bf2e 23%,#74bf2e 70%,#74bf2e 70%,#578220 71%,#578220 72%,#74bf2e 73%,#74bf2e 75%,#527e23 86%);border: 1px solid #43A047; 
+  box-shadow: 5px 0px 3px #2E7D32 inset;
+  position: relative;
+  &:after{
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 50px;
+    background: linear-gradient(to right, #9de757 4%,#d5f97f 6%,#9de757 7%,#9de757 14%,#9de757 14%,#74bf2e 15%,#74bf2e 17%,#9de757 20%,#74bf2e 23%,#74bf2e 70%,#74bf2e 70%,#578220 71%,#578220 72%,#74bf2e 73%,#74bf2e 75%,#527e23 86%);
+    bottom: -1px;
+    box-shadow: 5px 0px 3px #2E7D32 inset;
+    border: 1px solid #43A047; 
+  }
+  
+  &:nth-child( 2n + 2) {
+    margin-top: 50vh;
+    &:after { top: -2px; }  
+  }
+  
+  &:nth-child( 4n + 1) {
+    margin-top: -20vh;  
+  }
+  
+  &:nth-child( 5n + 2) {
+    margin-left: 80px; 
+  }
+  
+  &:nth-child( 4n + 4) {
+    margin-top: 30vh;
+  }  
+  &:nth-child( 6n + 2) {
+    margin: 40vh 100px 0;
+  }
+  
+   &:nth-child( 6n + 1) {
+     height: 70vh;
+  }
+  
+  &:nth-child( 2n + 70) {
+    margin-left: 80px;
+    margin-right: 80px;
+  }
+}
+
+
+.overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url(https://i.ibb.co/2hsQZ5h/wp9956882-halloween-pixel-art-wallpapers.gif);
+    z-index: 25;
+    display: grid;
+    place-items: center;
+    cursor: auto;
+    visibility: hidden;
+
+    .popup {
+      .brd {
+        display: block;
+        margin: auto;
+        animation: rotate 2s steps(4) infinite; 
+      }
+    }
+
+    &:hover {
+      .popup {
+        animation: 0.5s popup;
+      }
+    }
+  }
+
+
+  .popup {
+    background: #FFECB3;
+    padding: 20px;
+    border: 5px solid #FFE0B2;
+    width: 400px;
+    box-shadow: 0 0 0 5px rgb(116, 90, 14), 0 0 3px rgb(212, 184, 25) inset;
+    h3 {
+      margin: 0;
+      text-align: center;
+      font-size: 42px;
+      font-weight: 800;
+      color: #FFCA28;
+      text-shadow:  0 2px  #a7810f ,
+                    0 -2px  #a7810f ,  
+                    -2px 0 #a7810f ,  
+                    2px 0 #a7810f;
+    }
+    .row {
+      display:flex;
+      justify-content: space-around;
+      font-size: 24px;
+      margin: 30px 0;
+      font-weight: 800;
+      color: #fff;
+      text-shadow:  0 2px  #a7810f ,
+                    0 -2px  #a7810f ,  
+                    -2px 0 #a7810f ,  
+                    2px 0 #a7810f;
+    }
+  }
+
+
+.btn {
+  display: block;
+  background: #fff;
+  width: 150px;
+  text-align: center;
+  line-height: 42px;
+  font-size: 24px;
+  margin: auto;
+  border: 2px solid #555;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 -10px 3px #eee inset;
+}
+
+
+.final {
+  position: relative;
+  z-index: 200;
+  width: 100vw;
+  height: 100vh;
+  place-items: center;
+  display: grid;
+  overflow: hidden;
+
+  &::before, &:after {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    box-shadow: $box-shadow2;
+    animation : 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
+  }
+
+  &::after {
+    animation-delay: 1.25s, 1.25s, 1.25s;
+    animation-duration: 1.25s, 1.25s, 6.25s;
+  }
+
+  .popup {
+    border: none;
+    box-shadow: none;
+    background: none;
+    animation-fill-mode: forwards;
+    animation: 2s popup;
+      cursor: pointer;
+    }
+  }
+
+
+
+        
+@keyframes bang {
+  to { box-shadow:$box-shadow}
+}
+    
+@keyframes gravity  {
+  to {
+    transform :translateY(200px);
+    opacity: 0;
+  }
+}
+    
+@keyframes position {
+  0%, 19.9% {
+    margin-top: 10%;
+    margin-left: 40%;
+  }
+  20%, 39.9% {
+    margin-top: 40%;
+    margin-left: 30%;
+  }
+  40%, 59.9% {  
+    margin-top: 20%;
+    margin-left: 70%
+  }
+  60%, 79.9% {  
+    margin-top: 30%;
+    margin-left: 20%;
+  }
+  80%, 99.9% {  
+    margin-top: 30%;
+    margin-left: 80%;
+  }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes popup {
+  0% { transform: scale(0); opacity: 0; }
+  80% { transform: scale(1.1) }
+  90% { transform: scale(0.9); }
+  50% , 100% { transform: rotate(1) ; opacity: 1;}
+}
