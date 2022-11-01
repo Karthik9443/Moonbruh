@@ -1,0 +1,29 @@
+-var brd = 'https://i.ibb.co/9qgGvRr/pixil-frame-0-9.png'
+input#start(type='checkbox')
+.starter
+  img(src=brd alt='')
+  h1 Moon BRUHH
+  label.btn(for='start') Start
+.env
+  .sky
+  .land
+  - for(var p =0; p < 240; p++)
+    .pipe
+  .final
+    .popup
+      h3 You Win..
+      .row
+        span.lagend Score - 
+        span.score
+      label.btn(for='start') Go Back
+  .overlay
+    .popup
+      img.brd(src=brd)
+      h3 Game Over
+      .row
+        span.lagend Score - 
+        span.score
+      label.btn(for='start') Okay
+.sticky
+  span.score Score: 
+
