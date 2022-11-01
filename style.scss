@@ -25,6 +25,10 @@ $bird: " https://i.ibb.co/9qgGvRr/pixil-frame-0-9.png";
 body {
   background:url(https://i.ibb.co/2hsQZ5h/wp9956882-halloween-pixel-art-wallpapers.gif);
   height: 100vh;
+min-height: 100%;
+background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center center;
   margin: 0;
   overflow: hidden;
   font-family: Arial;
