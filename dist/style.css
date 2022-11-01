@@ -9,7 +9,10 @@
 
 body {
   background: url(https://i.ibb.co/2K7qd4D/8f1dc5d2ec66c3ace881aead798f3f08.gif);
-  height: auto;
+  min-height: 100%;
+background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center center;
   margin: 0;
   overflow: hidden;
   font-family: Arial;
